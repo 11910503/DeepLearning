@@ -20,7 +20,7 @@ class CameraApp:
 
         # 打开视频源
         self.video_source = video_source
-        self.video_capture = cv2.VideoCapture(self.video_source)
+        self.video_capture  = cv2.VideoCapture('nvarguscamerasrc ! video/x-raw(memory:NVMM), width=3280, height=2464, format=(string)NV12, framerate=(fraction)20/1 ! nvvidconv ! video/x-raw, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink', cv2.CAP_GSTREAMER)
         if not self.video_capture.isOpened():
             raise ValueError("无法打开视频源", video_source)
 
