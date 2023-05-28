@@ -1,4 +1,4 @@
-import tkinter as tk
+import tk
 import cv2
 from PIL import Image, ImageTk
 import predicter
