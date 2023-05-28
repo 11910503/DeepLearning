@@ -27,7 +27,7 @@ class CameraApp:
 
     def update_live_image(self):
 
-        time.sleep(0.1)
+
         _, frame = self.video_capture.read()
 
 
