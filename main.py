@@ -2,6 +2,7 @@ import tkinter as tk
 import cv2
 from PIL import Image, ImageTk
 import predicter
+import time
 
 class CameraApp:
     def __init__(self, window, video_source=0):
@@ -18,12 +19,15 @@ class CameraApp:
 
         self.captured_page = CapturedPage(window)
 
-        self.video_capture = cv2.VideoCapture("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=1280, height=720, format=NV12, framerate=30/1 ! nvvidconv  ! video/x-raw, width=1280, height=720, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink")
+
 
         self.update_live_image()
 
     def update_live_image(self):
-        self.video_capture = cv2.VideoCapture(0)
+        self.video_capture = cv2.VideoCapture(
+            "nvarguscamerasrc ! video/x-raw(memory:NVMM), width=1280, height=720, format=NV12, framerate=30/1 ! nvvidconv  ! video/x-raw, width=1280, height=720, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink"
+        )
+        time.sleep(0.1)
         _, frame = self.video_capture.read()
         self.video_capture.release()
 
