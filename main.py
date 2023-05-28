@@ -18,24 +18,14 @@ class CameraApp:
 
         self.captured_page = CapturedPage(window)
 
-
-
-
-
-
-
+        self.video_capture = cv2.VideoCapture("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=1280, height=720, format=NV12, framerate=30/1 ! nvvidconv  ! video/x-raw, width=1280, height=720, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink")
 
         self.update_live_image()
 
     def update_live_image(self):
-        self.video_capture = cv2.VideoCapture(
-            'nvarguscamerasrc ! video/x-raw(memory:NVMM), framerate=(fraction)10/1 ! nvvidconv ! video/x-raw, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink',
-            cv2.CAP_GSTREAMER)
-        if not self.video_capture.isOpened():
-            raise ValueError("error", video_source)
-
+        self.video_capture = cv2.VideoCapture(0)
         _, frame = self.video_capture.read()
-
+        self.video_capture.release()
 
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
@@ -44,7 +34,7 @@ class CameraApp:
         image_path = "captured_image.jpg"
         image_fiting_path="test_image.jpg"
         image.save(image_path)
-        self.video_capture.release()
+
         self.predicter.run(image_path,image_fiting_path)
         image2 = Image.open(image_fiting_path)
 
