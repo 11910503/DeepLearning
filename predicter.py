@@ -14,7 +14,7 @@ from utils.plots import Annotator, colors, save_one_box
 from utils.torch_utils import select_device, smart_inference_mode
 class predicter:
     def __init__(self,weight):
-        device = select_device('')
+        device = select_device('cpu')
         model = DetectMultiBackend(weight, device=device, dnn=False, data='data/coco128.yaml', fp16=False)
         stride, names, pt = model.stride, model.names, model.pt
 
