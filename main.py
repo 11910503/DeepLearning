@@ -28,7 +28,7 @@ class CameraApp:
         self.width = self.video_capture.get(cv2.CAP_PROP_FRAME_WIDTH)
         self.height = self.video_capture.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
-        # 更新实时图像
+
         self.update_live_image()
 
     def update_live_image(self):
@@ -70,7 +70,7 @@ class CameraApp:
 
         image = Image.fromarray(frame_rgb)
 
-        # 保存图像
+
         image_path = "captured_image.jpg"
         image.save(image_path)
 
