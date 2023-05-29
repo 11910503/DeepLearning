@@ -4,9 +4,12 @@ import platform
 import sys
 from pathlib import Path
 from PIL import Image
+import numpy as np
 
 import torch
 from models.common import DetectMultiBackend
+from utils.augmentations import (Albumentations, augment_hsv, classify_albumentations, classify_transforms, copy_paste,
+                                 letterbox, mixup, random_perspective)
 from utils.dataloaders import IMG_FORMATS, VID_FORMATS, LoadImages, LoadScreenshots, LoadStreams
 from utils.general import (LOGGER, Profile, check_file, check_img_size, check_imshow, check_requirements, colorstr, cv2,
                            increment_path, non_max_suppression, print_args, scale_boxes, strip_optimizer, xyxy2xywh)
@@ -25,14 +28,18 @@ class predicter:
         self.pt=pt
         self.bs=1
         self.imgsz = check_img_size((640, 640), s=self.stride)  # check image size
+        self.model.warmup(imgsz=(1 if self.pt or self.model.triton else self.bs, 3, *self.imgsz))  # warmup
         print("model ready")
 
     def run(self,pic,save_path):
+
         dataset = LoadImages(pic, img_size=self.imgsz, stride=self.stride, auto=self.pt, vid_stride=1)
-        self.model.warmup(imgsz=(1 if self.pt or self.model.triton else self.bs, 3, *self.imgsz))  # warmup
+
         seen, windows, dt = 0, [], (Profile(), Profile(), Profile())
         for path, im, im0s, vid_cap, s in dataset:
+            print(dt)
             with dt[0]:
+                print(1)
                 im = torch.from_numpy(im).to(self.model.device)
                 im = im.half() if self.model.fp16 else im.float()  # uint8 to fp16/32
                 im /= 255  # 0 - 255 to 0.0 - 1.0
@@ -41,10 +48,12 @@ class predicter:
 
             # Inference
             with dt[1]:
+                print(2)
                 pred = self.model(im, augment=False, visualize=False)
 
             # NMS
             with dt[2]:
+                print(3)
                 pred = non_max_suppression(pred, 0.25, 0.45, None, False, max_det=1000)
 
             # Second-stage classifier (optional)
@@ -82,8 +91,58 @@ class predicter:
 
                 # Stream results
                 im0=annotator.result()
-
                 cv2.imwrite(save_path, im0)
+                return im0
+    def runtest(self,pic):
+        im0s=pic.copy()
+        im = letterbox(im0s, self.imgsz, stride=self.stride, auto=True)[0]  # padded resize
+        im = im.transpose((2, 0, 1))[::-1]  # HWC to CHW, BGR to RGB
+        im = np.ascontiguousarray(im)
+        im = torch.from_numpy(im).to(self.model.device)
+        im = im.half() if self.model.fp16 else im.float()  # uint8 to fp16/32
+        im /= 255  # 0 - 255 to 0.0 - 1.0
+        if len(im.shape) == 3:
+            im = im[None]  # expand for batch dim
+        pred = self.model(im, augment=False, visualize=False)
+        pred = non_max_suppression(pred, 0.25, 0.45, None, False, max_det=1000)
+
+        for i, det in enumerate(pred):  # per image
+
+
+            im0 = im0s.copy()
+
+
+
+            annotator = Annotator(im0, line_width=3, example=str(self.names))
+
+            if len(det):
+                # Rescale boxes from img_size to im0 size
+                det[:, :4] = scale_boxes(im.shape[2:], det[:, :4], im0.shape).round()
+
+                # Print results
+
+
+
+
+                # Write results
+                for *xyxy, conf, cls in reversed(det):
+                    c = int(cls)  # integer class
+                    label = f'{self.names[c]}'
+                    annotator.box_label(xyxy, label, color=colors(c, True))
+
+
+            # Stream results
+            im0 = annotator.result()
+            return im0
+
+
+
+
+
+
+
+
+
 
 
 

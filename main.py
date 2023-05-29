@@ -18,10 +18,10 @@ class CameraApp:
 
 
         self.captured_page = CapturedPage(window)
+        self.inputsting="nvarguscamerasrc ! video/x-raw(memory:NVMM), width=1280, height=720, format=NV12, framerate=30/1 ! nvvidconv  ! video/x-raw, width=1280, height=720, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink"
 
         self.video_capture = cv2.VideoCapture(
-            "nvarguscamerasrc ! video/x-raw(memory:NVMM), width=1280, height=720, format=NV12, framerate=30/1 ! nvvidconv  ! video/x-raw, width=1280, height=720, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink"
-        )
+            0)
 
         self.update_live_image()
 
@@ -34,13 +34,17 @@ class CameraApp:
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
 
+
         image = Image.fromarray(frame_rgb)
         image_path = "captured_image.jpg"
         image_fiting_path="test_image.jpg"
         image.save(image_path)
+        image2=self.predicter.runtest(frame_rgb)
+        #image2=self.predicter.run(image_path,image_fiting_path)
+        #image2 = Image.open(image_fiting_path)
+        #image2=cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
 
-        self.predicter.run(image_path,image_fiting_path)
-        image2 = Image.open(image_fiting_path)
+        image2=Image.fromarray(image2)
 
 
         image2 = image2.resize((int(self.window.winfo_screenwidth()), int(self.window.winfo_screenheight())))
@@ -53,7 +57,7 @@ class CameraApp:
         self.live_image_label.image = photo
 
 
-        self.window.after(10, self.update_live_image)
+        self.window.after(1, self.update_live_image)
 
     def capture_image(self):
 
