@@ -22,9 +22,7 @@
     <list default="true" id="9fc26a8e-2960-4180-b487-674231795baf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/captured_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/captured_image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/predicter.py" beforeDir="false" afterPath="$PROJECT_DIR$/predicter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/test_image.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

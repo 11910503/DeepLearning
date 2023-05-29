@@ -85,7 +85,8 @@ class predicter:
                         line = (cls, *xywh, conf)
                         c = int(cls)  # integer class
                         label = f'{self.names[c]}'
-                        annotator.box_label(xyxy, label, color=colors(c, True))
+                        if label=="person":
+                            annotator.box_label(xyxy, label, color=colors(c, True))
                         print(('%g ' * len(line)).rstrip() % line + '\n')
 
 
@@ -128,7 +129,8 @@ class predicter:
                 for *xyxy, conf, cls in reversed(det):
                     c = int(cls)  # integer class
                     label = f'{self.names[c]}'
-                    annotator.box_label(xyxy, label, color=colors(c, True))
+                    if label=="person":
+                        annotator.box_label(xyxy, label, color=colors(c, True))
 
 
             # Stream results
