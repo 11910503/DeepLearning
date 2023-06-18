@@ -21,7 +21,7 @@ class CameraApp:
         self.inputsting="nvarguscamerasrc ! video/x-raw(memory:NVMM), width=1280, height=720, format=NV12, framerate=30/1 ! nvvidconv  ! video/x-raw, width=1280, height=720, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink"
 
         self.video_capture = cv2.VideoCapture(
-            self.inputsting)
+            0)
 
         self.update_live_image()
 

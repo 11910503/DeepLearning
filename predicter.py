@@ -129,8 +129,8 @@ class predicter:
                 for *xyxy, conf, cls in reversed(det):
                     c = int(cls)  # integer class
                     label = f'{self.names[c]}'
-                    if label=="person":
-                        annotator.box_label(xyxy, label, color=colors(c, True))
+
+                    annotator.box_label(xyxy, label, color=colors(c, True))
 
 
             # Stream results
