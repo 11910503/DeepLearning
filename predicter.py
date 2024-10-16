@@ -108,34 +108,36 @@ class predicter:
         pred = non_max_suppression(pred, 0.25, 0.45, None, False, max_det=1000)
 
         for i, det in enumerate(pred):  # per image
-
-
             im0 = im0s.copy()
-
-
-
             annotator = Annotator(im0, line_width=3, example=str(self.names))
 
             if len(det):
                 # Rescale boxes from img_size to im0 size
                 det[:, :4] = scale_boxes(im.shape[2:], det[:, :4], im0.shape).round()
-
                 # Print results
-
-
-
-
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
                     c = int(cls)  # integer class
                     label = f'{self.names[c]}'
 
                     annotator.box_label(xyxy, label, color=colors(c, True))
-
-
             # Stream results
             im0 = annotator.result()
             return im0
+    def runtest2(self,pic):
+        im0s=pic.copy()
+        im = letterbox(im0s, self.imgsz, stride=self.stride, auto=True)[0]  # padded resize
+        im = im.transpose((2, 0, 1))[::-1]  # HWC to CHW, BGR to RGB
+        im = np.ascontiguousarray(im)
+        im = torch.from_numpy(im).to(self.model.device)
+        im = im.half() if self.model.fp16 else im.float()  # uint8 to fp16/32
+        im /= 255  # 0 - 255 to 0.0 - 1.0
+        if len(im.shape) == 3:
+            im = im[None]  # expand for batch dim
+        pred = self.model(im, augment=False, visualize=False)
+        pred = non_max_suppression(pred, 0.25, 0.45, None, False, max_det=1000)
+
+        return  pred
 
 
 

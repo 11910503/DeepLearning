@@ -39,6 +39,7 @@ class CameraApp:
         image_path = "captured_image.jpg"
         image_fiting_path="test_image.jpg"
         image.save(image_path)
+
         image2=self.predicter.runtest(frame_rgb)
         #image2=self.predicter.run(image_path,image_fiting_path)
         #image2 = Image.open(image_fiting_path)
