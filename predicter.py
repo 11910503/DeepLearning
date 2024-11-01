@@ -16,6 +16,7 @@ from yoloutils.general import (LOGGER, Profile, check_file, check_img_size, chec
                                increment_path, non_max_suppression, print_args, scale_boxes, strip_optimizer, xyxy2xywh)
 from yoloutils.plots import Annotator, colors, save_one_box
 from yoloutils.torch_utils import select_device, smart_inference_mode
+import torch.nn.functional as F
 class predicter:
     def __init__(self,weight):
         device = select_device('')
@@ -29,7 +30,6 @@ class predicter:
         self.imgsz = check_img_size((640, 640), s=self.stride)  # check image size
         self.model.warmup(imgsz=(1 if self.pt or self.model.triton else self.bs, 3, *self.imgsz))  # warmup
         print("model ready")
-
     def run(self,pic,save_path):
 
         dataset = LoadImages(pic, img_size=self.imgsz, stride=self.stride, auto=self.pt, vid_stride=1)
@@ -162,13 +162,36 @@ class predicter:
                     ans.append(line)
         return ans
 
+class predicter_cls:
+    def __init__(self,weight):
+        device = select_device('')
+        model = DetectMultiBackend(weight, device=device, dnn=False, data='data/coco128.yaml', fp16=False)
+        stride, names, pt = model.stride, model.names, model.pt
+        imgsz = check_img_size((224,224), s=stride)  # check image size
+        self.model = model
+        self.stride = stride
+        self.names = names
+        self.pt = pt
+        self.bs = 1
+        self.imgsz = check_img_size((224, 224), s=self.stride)
+        self.transforms = classify_transforms(self.imgsz[0])
+          # check image size
+        self.model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
+    def run(self,pic):
+        im0s = pic.copy()
+        im=self.transforms(im0s)
+        # im = letterbox(im0s, self.imgsz, stride=self.stride, auto=True)[0]  # padded resize
+        # im = im.transpose((2, 0, 1))[::-1]  # HWC to CHW, BGR to RGB
+        # im = np.ascontiguousarray(im)
+        im = torch.Tensor(im).to(self.model.device)
+        im = im.half() if self.model.fp16 else im.float()  # uint8 to fp16/32
+        im /= 255  # 0 - 255 to 0.0 - 1.0
+        if len(im.shape) == 3:
+            im = im[None]  # expand for batch dim
+        results = self.model(im)
 
-
-
-
-
-
-
+        pred = F.softmax(results, dim=1)
+        return pred
 
 
 

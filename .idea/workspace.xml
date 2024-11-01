@@ -19,7 +19,63 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9fc26a8e-2960-4180-b487-674231795baf" name="Default Changelist" comment="" />
+    <list default="true" id="9fc26a8e-2960-4180-b487-674231795baf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/testimage_cls.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/activations.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/augmentations.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/autoanchor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/autobatch.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/aws/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/aws/mime.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/aws/resume.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/aws/userdata.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/callbacks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/dataloaders.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/docker/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/docker/Dockerfile-arm64" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/docker/Dockerfile-cpu" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/downloads.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/flask_rest_api/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/flask_rest_api/example_request.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/flask_rest_api/restapi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/general.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/google_app_engine/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/google_app_engine/additional_requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/google_app_engine/app.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/clearml/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/clearml/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/clearml/clearml_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/clearml/hpo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/comet/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/comet/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/comet/comet_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/comet/hpo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/comet/optimizer_config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/wandb/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/wandb/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/wandb/log_dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/wandb/sweep.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/wandb/sweep.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loggers/wandb/wandb_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/loss.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/metrics.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/plots.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/segment/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/segment/augmentations.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/segment/dataloaders.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/segment/general.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/segment/loss.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/segment/metrics.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/segment/plots.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/torch_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/triton.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/weigth/sandwich_cls.pt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/predicter.py" beforeDir="false" afterPath="$PROJECT_DIR$/predicter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testimage.py" beforeDir="false" afterPath="$PROJECT_DIR$/testimage.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,13 +98,18 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\huangtest\DeepLearning" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\huangtest\DeepLearning" />
+      <recent name="E:\huangtest\DeepLearning\yoloutils" />
+      <recent name="E:\huangtest\DeepLearning\weigth" />
       <recent name="E:\classify\DeepLearning" />
       <recent name="E:\classify\vedio_read" />
-      <recent name="E:\classify\vedio_read\weigth" />
     </key>
   </component>
   <component name="RunManager">
